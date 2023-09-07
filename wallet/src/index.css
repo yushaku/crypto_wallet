@@ -2,6 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .flexCenter {
+    @apply flex flex-wrap items-center justify-center;
+  }
+
+  .baseText {
+    @apply text-grayColor text-sm md:text-base;
+  }
+
+  .animationShow {
+    @apply transition-all duration-300 ease-in-out;
+  }
+}
+
 body {
   margin: 0;
   font-family: -apple-system, "Roboto", "Segoe UI", "Oxygen";

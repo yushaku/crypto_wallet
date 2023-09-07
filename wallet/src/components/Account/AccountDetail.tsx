@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-
 import { TfiClipboard } from "react-icons/tfi";
-
 import { sendToken } from "../../utils/TransactionUtils";
 import AccountTransactions from "./AccountTransactions";
 import { ethers } from "ethers";
@@ -9,7 +7,6 @@ import { shortenAddress, toFixedIfNecessary } from "../../utils/AccountUtils";
 import "./Account.css";
 import { Account } from "../../types/Account";
 import { goerli } from "../../utils/Chain";
-import { Features } from "../Feature";
 
 interface AccountDetailProps {
   account: Account;
@@ -106,8 +103,6 @@ const AccountDetail: React.FC<AccountDetailProps> = ({ account }) => {
         </p>
         <p className="text-2xl mt-3">{balance} ETH</p>
       </h4>
-
-      <Features className="mb-3" />
 
       <div className="text-start">
         <label htmlFor="destinationAddress">Destination Address:</label>

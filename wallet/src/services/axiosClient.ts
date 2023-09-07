@@ -16,14 +16,19 @@ export const httpClient = () => {
   return client;
 };
 
-export const axiosClient = httpClient();
-
 export const getTansactions = async (
-  address: string,
+  account: string,
   chainName = "ethereum"
 ) => {
-  const res = await httpClient().get(address, {
+  const res = await httpClient().get(account, {
     params: chainName,
   });
+  return res.data;
+};
+
+export const getTokenPrice = async (tokenAdd: string, networkId: string) => {
+  const res = await httpClient().get(
+    "/erc20/" + tokenAdd + "/price?chain=" + networkId
+  );
   return res.data;
 };

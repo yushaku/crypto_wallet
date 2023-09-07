@@ -1,28 +1,25 @@
 import { Account } from "@/types/Account";
+import { RECOVERYKEY } from "../../utils/constants";
 import React, { useCallback, useEffect, useState } from "react";
 import { generateAccount } from "../../utils/AccountUtils";
 import AccountDetail from "./AccountDetail";
 
-const recoveryPhraseKeyName = "recoveryPhrase";
-
 function AccountCreate() {
   const [seedphrase, setSeedphrase] = useState("");
-  const [account, setAccount] = useState<Account | null>(null);
   const [showRecoverInput, setShowRecoverInput] = useState(false);
+  const [account, setAccount] = useState<Account | null>(null);
 
   const recoverAccount = useCallback(async (recoveryPhrase: string) => {
     const result = generateAccount(recoveryPhrase);
     setAccount(result.account);
 
-    if (localStorage.getItem(recoveryPhraseKeyName) !== recoveryPhrase) {
-      localStorage.setItem(recoveryPhraseKeyName, recoveryPhrase);
+    if (localStorage.getItem(RECOVERYKEY) !== recoveryPhrase) {
+      localStorage.setItem(RECOVERYKEY, recoveryPhrase);
     }
   }, []);
 
   useEffect(() => {
-    const localStorageRecoveryPhrase = localStorage.getItem(
-      recoveryPhraseKeyName
-    );
+    const localStorageRecoveryPhrase = localStorage.getItem(RECOVERYKEY);
     if (localStorageRecoveryPhrase) {
       setSeedphrase(localStorageRecoveryPhrase);
       recoverAccount(localStorageRecoveryPhrase);
@@ -48,48 +45,44 @@ function AccountCreate() {
   };
 
   return (
-    <div className="my-10">
-      <h1 className="text-blue-500 text-3xl mb-3 font-medium">Zinza Wallet</h1>
-
-      <div className="p-5 m-3 card shadow">
-        {account ? (
-          <AccountDetail account={account} />
-        ) : (
-          <form onSubmit={(event) => event.preventDefault()}>
-            <button
-              type="button"
-              className="btn btn-primary"
-              onClick={createAccount}
-            >
-              Create Account
-            </button>
-            <button
-              type="button"
-              className="btn btn-outline-primary ml-3"
-              onClick={() =>
-                showRecoverInput
-                  ? recoverAccount(seedphrase)
-                  : setShowRecoverInput(true)
-              }
-              disabled={showRecoverInput && !seedphrase}
-            >
-              Recover account
-            </button>
-            {showRecoverInput && (
-              <div className="form-group mt-3">
-                <input
-                  type="text"
-                  placeholder="Seedphrase or private key for recovery"
-                  className="form-control"
-                  value={seedphrase}
-                  onChange={handleChange}
-                  onKeyDown={handleKeyDown}
-                />
-              </div>
-            )}
-          </form>
-        )}
-      </div>
+    <div className="p-5 m-3 card shadow bg-gray-100/50">
+      {account ? (
+        <AccountDetail account={account} />
+      ) : (
+        <form onSubmit={(event) => event.preventDefault()}>
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={createAccount}
+          >
+            Create Account
+          </button>
+          <button
+            type="button"
+            className="btn btn-outline-primary ml-3"
+            onClick={() =>
+              showRecoverInput
+                ? recoverAccount(seedphrase)
+                : setShowRecoverInput(true)
+            }
+            disabled={showRecoverInput && !seedphrase}
+          >
+            Recover account
+          </button>
+          {showRecoverInput && (
+            <div className="form-group mt-3">
+              <input
+                type="text"
+                placeholder="Seedphrase or private key for recovery"
+                className="form-control"
+                value={seedphrase}
+                onChange={handleChange}
+                onKeyDown={handleKeyDown}
+              />
+            </div>
+          )}
+        </form>
+      )}
     </div>
   );
 }
