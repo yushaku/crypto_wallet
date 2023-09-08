@@ -1,7 +1,7 @@
-import { Account } from "@/types/Account";
-import { RECOVERYKEY } from "../../utils/constants";
 import React, { useCallback, useEffect, useState } from "react";
+import { Account } from "../../types/Account";
 import { generateAccount } from "../../utils/AccountUtils";
+import { RECOVERYKEY } from "../../utils/constants";
 import AccountDetail from "./AccountDetail";
 
 function AccountCreate() {
@@ -45,7 +45,7 @@ function AccountCreate() {
   };
 
   return (
-    <div className="p-5 m-3 card shadow bg-gray-100/50">
+    <div className="p-5 m-3 shadow bg-gray-100/50">
       {account ? (
         <AccountDetail account={account} />
       ) : (

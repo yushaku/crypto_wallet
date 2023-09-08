@@ -24,6 +24,20 @@ export function generateAccount(
   return { account, seedPhrase: seedPhrase.includes(" ") ? seedPhrase : "" };
 }
 
+export function parseKey(seedPhrase: string = "", index: number = 0) {
+  let wallet: Wallet;
+
+  wallet = seedPhrase.includes(" ")
+    ? Wallet.fromMnemonic(seedPhrase, `m/44'/60'/0'/0/${index}`)
+    : new Wallet(seedPhrase);
+
+  return wallet.address;
+}
+
+export function createAccount() {
+  return Wallet.createRandom();
+}
+
 export function shortenAddress(str: string, numChars: number = 4) {
   return `${str.substring(0, numChars)}...${str.substring(
     str.length - numChars

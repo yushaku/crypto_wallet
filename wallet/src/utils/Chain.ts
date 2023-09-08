@@ -1,3 +1,5 @@
+import { FaEthereum } from "react-icons/fa";
+
 export type Chain = {
   chainId: string;
   name: string;
@@ -31,3 +33,11 @@ export const CHAINS_CONFIG = {
   [mainnet.chainId]: mainnet,
   [sepolia.chainId]: sepolia,
 };
+
+export const CHAINS_LOGO = {
+  [goerli.chainId]: FaEthereum,
+  [mainnet.chainId]: FaEthereum,
+  [sepolia.chainId]: FaEthereum,
+};
+
+export const chainList = [mainnet, goerli, sepolia];

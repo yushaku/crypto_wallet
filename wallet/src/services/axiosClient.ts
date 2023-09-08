@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API_KEY =
-  "EuwYtjWwWHGbnwsCnGauMtMMaEQZugtjaws2ybm2ZpSR15a8vzl6QUPkEUWHTOCU";
+  "Eg0NEVzsnchJKNDfZaoqRjmVubCk6ujSCqoksiEEUmgGFjNZiSPBHfbMmvdzVJQ6";
 
 export const httpClient = () => {
   const client = axios.create({
@@ -30,5 +30,31 @@ export const getTokenPrice = async (tokenAdd: string, networkId: string) => {
   const res = await httpClient().get(
     "/erc20/" + tokenAdd + "/price?chain=" + networkId
   );
-  return res.data;
+  return res.data as TokenPrice;
 };
+
+export const getBalance = async (address: string, networkId: string) => {
+  const res = await httpClient().get(`/${address}/balance?chain=${networkId}`);
+  return res.data as { balance: string };
+};
+
+export interface TokenPrice {
+  tokenName: string;
+  tokenSymbol: string;
+  tokenLogo: string;
+  tokenDecimals: string;
+  nativePrice: NativePrice;
+  usdPrice: number;
+  usdPriceFormatted: string;
+  exchangeAddress: string;
+  exchangeName: string;
+  tokenAddress: string;
+}
+
+interface NativePrice {
+  value: string;
+  decimals: number;
+  name: string;
+  symbol: string;
+  address: string;
+}

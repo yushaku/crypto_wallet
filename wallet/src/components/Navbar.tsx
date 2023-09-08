@@ -4,9 +4,15 @@ import {
   TfiPlus,
   TfiExchangeVertical,
   TfiStatsUp,
+  TfiInfoAlt,
 } from "react-icons/tfi";
 
 export const topBar = [
+  {
+    Icon: TfiStatsUp,
+    name: "Portfolio",
+    link: "/portfolio",
+  },
   {
     Icon: TfiArrowTopRight,
     link: "/send",
@@ -23,9 +29,9 @@ export const topBar = [
     link: "/exchange",
   },
   {
-    Icon: TfiStatsUp,
-    name: "Portfolio",
-    link: "/portfolio",
+    Icon: TfiInfoAlt,
+    name: "Accounts",
+    link: "/accounts",
   },
 ];
 
@@ -41,9 +47,9 @@ export const Navbar = () => {
   };
 
   return (
-    <nav className="rounded-3xl bg-gray-100/50 shadow-md ml-6 my-[2dvh] h-[80dvh] flex flex-col">
+    <nav className="rounded-3xl bg-gray-100/50 shadow-md my-[2dvh] h-[80dvh] flex flex-col">
       <div className="py-4 my-8">
-        <Link to="/" className="flexCenter">
+        <Link to="/portfolio" className="flexCenter">
           <img
             alt="zinza wallet logo"
             src="/logo.png"
@@ -53,20 +59,19 @@ export const Navbar = () => {
           />
         </Link>
 
-        <ul className="flex flex-col gap-2 mt-12">
+        <ul className="flex flex-col gap-2 mt-3">
           {topBar.map(({ link, Icon, name }, index) => {
             const isSelected = location.pathname.includes(link);
-
-            const selectLink = isSelected ? "gradient_bg" : "stroke-white";
+            const selectLink = isSelected ? "bg-blue-100" : "";
 
             return (
               <li
                 key={index}
                 onClick={() => handleClick(link)}
-                className="p-3 w-[250px] "
+                className={`w-[250px] ${selectLink} rounded-r-lg`}
               >
                 <button
-                  className={`${selectLink} relative flex items-center p-4 rounded-full`}
+                  className={`relative flex items-center p-4 rounded-full`}
                 >
                   <Icon className={`stroke-blue-500 stroke-[1px] w-6 h-6`} />
                   <span className="ml-3">{name}</span>

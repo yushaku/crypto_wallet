@@ -4,7 +4,7 @@ import { getTansactions } from "../../services/axiosClient";
 import { shortenAddress } from "../../utils/AccountUtils";
 import { Account } from "../../types/Account";
 import { goerli } from "../../utils/Chain";
-import { Transaction } from "@/types/Transaction";
+import { Transaction } from "../../types/Transaction";
 
 type AccountTransactionsProps = {
   account: Account;

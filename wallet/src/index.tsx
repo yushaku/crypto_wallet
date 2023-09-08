@@ -2,6 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
+import { ThemeProvider } from "@material-tailwind/react";
+import { AccountProvider } from "./hooks/AccountProvider";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 
@@ -11,7 +13,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <AccountProvider>
+        <ThemeProvider>
+          <App />
+        </ThemeProvider>
+      </AccountProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

@@ -1,5 +1,5 @@
-import { goerli } from "@/utils/Chain";
 import axios from "axios";
+import { goerli } from "../utils/Chain";
 
 export class TransactionService {
   static API_URL = "https://deep-index.moralis.io/api/v2";
